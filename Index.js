@@ -7,8 +7,11 @@ const port = 3000
 const fs = require('fs');
 const path = require('path');
 
+const authRoutes = require("./routes/auth");
+
 app.use(express.json());
 
+app.use(authRoutes);
 
 app.post('/register', (req, res) => {
     const { username, password } = req.body;

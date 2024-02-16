@@ -1,11 +1,6 @@
 {
-  "admin": {
-    "password": "admin"
-  },
-  "Tom": {
-    "password": "T0m3str0ux"
-  },
-  "Tomas": {
-    "password": "T0m3str0ux"
-  }
+  "users": [
+
+  ],
+  "jwtKey": "superSecretKey"
 }
