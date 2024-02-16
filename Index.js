@@ -4,7 +4,29 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+const fs = require('fs');
+const path = require('path');
+
+app.use(express.json());
+
+
+app.post('/register', (req, res) => {
+    const { username, password } = req.body;
+
+    // Check if username already exists
+    const users = JSON.parse(fs.readFileSync(path.join(__dirname, './DataBase', 'users.json'), 'utf-8'));
+    if (users[username]) {
+        return res.status(400).json({ error: 'This ID already exists' });
+    }
+
+    // Store user data
+    users[username] = { password };
+    fs.writeFileSync(path.join(__dirname, './DataBase', 'users.json'), JSON.stringify(users, null, 2));
+    res.status(200).json({ message: 'Your account has been created successfully' });
+});
+
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`API running : localhost:${port}`)
 })
+
