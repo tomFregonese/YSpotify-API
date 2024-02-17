@@ -1,6 +1,13 @@
 {
   "users": [
-
+    {
+      "username": "Tom",
+      "password": "Tes"
+    },
+    {
+      "username": "Tommes",
+      "password": "Test"
+    }
   ],
   "jwtKey": "superSecretKey"
 }

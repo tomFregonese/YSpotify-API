@@ -4,6 +4,22 @@ const bcrypt = require("bcrypt");
 const fs = require("fs");
 const path = require("path");
 
+exports.register = (req, res) => {
+    const { username, password } = req.body;
+
+    // Check if username already exists
+    const data = JSON.parse(fs.readFileSync(path.join(__dirname, '../DataBase', 'users.json'), 'utf-8'));
+    if (data.users.find(user => user.username === username)) {
+        return res.status(400).json({ error: 'This ID already exists' });
+    }
+
+    // Store user data
+    data.users.push({ username, password });
+    fs.writeFileSync(path.join(__dirname, '../DataBase', 'users.json'), JSON.stringify(data, null, 2));
+    res.status(200).json({ message: 'Your account has been created successfully' });
+};
+
+
 exports.login = async (req, res) => {
 
     const authHeader = req.headers.authorization;
@@ -39,7 +55,6 @@ exports.login = async (req, res) => {
     } else {
         return res.status(500).json("Error when saving token");
     }
-
 
 };
 
