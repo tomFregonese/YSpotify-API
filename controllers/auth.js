@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const fs = require("fs");
 const path = require("path");
 
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
     const { username, password } = req.body;
 
     // Check if username already exists
@@ -13,8 +13,11 @@ exports.register = (req, res) => {
         return res.status(400).json({ error: 'This ID already exists' });
     }
 
+    // Hashing password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     // Store user data
-    data.users.push({ username, password });
+    data.users.push({ username, password: hashedPassword });
     fs.writeFileSync(path.join(__dirname, '../DataBase', 'users.json'), JSON.stringify(data, null, 2));
     res.status(200).json({ message: 'Your account has been created successfully' });
 };
@@ -62,7 +65,7 @@ exports.login = async (req, res) => {
 const saveJWT = (user, token) => {
     if (user) {
         user.jwt = token;
-        fs.writeFileSync(path.join(__dirname, "../data", "users.json"), JSON.stringify(data, null, 2));
+        fs.writeFileSync(path.join(__dirname, "../DataBase", "users.json"), JSON.stringify(data, null, 2));
         return true;
     }
     return false;
