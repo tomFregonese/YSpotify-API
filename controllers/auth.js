@@ -26,30 +26,28 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
 
     const authHeader = req.headers.authorization;
-    //Vérification que le header est bien un Basic Auth
+    //Check if the header is authorization Bearer
     if (!authHeader || !authHeader.startsWith("Basic ")) {
         return res.status(401).json("Basic authentication required");
     }
 
-    //Récupération et vérification des données saisie pour l'identification
+    //Decoding header credentials
     const encodedCredentials = authHeader.split(' ')[1];
     const decodedCredentials = Buffer.from(encodedCredentials, "base64").toString();
     const [username, password] = decodedCredentials.split(':');
 
-    //Récupération de l'utilisateur
+    //Check if the user is registered
     const users = data.users;
     const user = users.find(usr => usr.username === username );
     if (!user) {
-        return res.status(401).json("Incorrect username");
+        return res.status(401).json("Incorrect username or user not registered");
     }
 
-    //Vérification de la validité du mot de passe
     const passwordMatch = await comparePassword(password, user.password);
     if (!passwordMatch) {
         return res.status(401).json("Incorrect password")
     }
 
-    //Émission du jwt
     const token = jwt.sign({ sub: user.username }, data.jwtKey, { expiresIn: "1h"});
     return res.json(token);
 };
