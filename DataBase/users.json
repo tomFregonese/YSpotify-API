@@ -6,8 +6,7 @@
     },
     {
       "username": "Tom",
-      "password": "$2b$10$FD3745Plp5PnNnOCMUlm6.Uagx/1S0Zy6GdR7r2q8fQu8Tzr5fV8m",
-      "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUb20iLCJpYXQiOjE3MDgxODYyMjYsImV4cCI6MTcwODE4OTgyNn0.-_I5QXCHBwsuP5oMVkRXCwNaWedSbJJo4g1HLq7Jrgg"
+      "password": "$2b$10$FD3745Plp5PnNnOCMUlm6.Uagx/1S0Zy6GdR7r2q8fQu8Tzr5fV8m"
     }
   ],
   "jwtKey": "superSecretKey"
