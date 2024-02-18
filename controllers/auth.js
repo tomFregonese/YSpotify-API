@@ -51,24 +51,7 @@ exports.login = async (req, res) => {
 
     //Émission du jwt
     const token = jwt.sign({ sub: user.username }, data.jwtKey, { expiresIn: "1h"});
-
-    //Inscription du jwt dans la base de donnée
-    if (saveJWT(user, token)) {
-        return res.json("JWT token sucessfully created and saved");
-    } else {
-        return res.status(500).json("Error when saving token");
-    }
-
-};
-
-
-const saveJWT = (user, token) => {
-    if (user) {
-        user.jwt = token;
-        fs.writeFileSync(path.join(__dirname, "../DataBase", "users.json"), JSON.stringify(data, null, 2));
-        return true;
-    }
-    return false;
+    return res.json(token);
 };
 
 const comparePassword = async (plainPassword, hashedPassword) => {
