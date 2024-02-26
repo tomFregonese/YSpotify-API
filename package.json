@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "supervisor index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "swagger": "node ./generateSwagger.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "supervisor": "^0.12.0"
+    "supervisor": "^0.12.0",
+    "swagger-autogen": "^2.23.7"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
