@@ -24,7 +24,7 @@ exports.authenticateJwtToken = (req, res, next) => {
                 return res.status(401).json("Access denied: JWT token invalid");
             }
         }
-        res.user = decodedToken;
+        req.user = decodedToken;
         next();
     });
 };
