@@ -6,7 +6,7 @@
   "scripts": {
     "start": "supervisor index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "swagger": "node ./generateSwagger.js"
+    "swagger": "node ./swagger/generateSwagger.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,7 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "swagger-ui-express": "^5.0.0"
   }
 }

@@ -9,7 +9,7 @@ const doc = {
 }
 const outputFile = "./swagger_output.json";
 const routes = [
-    "./routes/auth.js"
+    "../routes/auth.js"
 ];
 
 autoSwagger(outputFile, routes, doc)

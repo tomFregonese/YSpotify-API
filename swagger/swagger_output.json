@@ -1,0 +1,73 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "YSpotify-API",
+    "description": "API allowing users to be registered, connected, part of a group and can synchronize data from spotify API",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "tags": [
+          "Connexion"
+        ],
+        "summary": "Register a new user",
+        "description": "Register a new user if it does not already exist.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User successfully registered"
+          },
+          "400": {
+            "description": "User already exist"
+          }
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "tags": [
+          "Connexion"
+        ],
+        "summary": "Log in an existing user.",
+        "description": "Generate a 1h expiring JWT token for a user.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JWT token generated successfully"
+          },
+          "401": {
+            "description": "JWT token not generated: wrong header or wrong credentials"
+          }
+        }
+      }
+    }
+  }
+}

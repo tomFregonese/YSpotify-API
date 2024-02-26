@@ -6,6 +6,7 @@ const path = require("path");
 
 exports.register = async (req, res) => {
     /*
+    #swagger.tags = ['Connexion']
     #swagger.summary = Register a new user
     #swagger.description = Register a new user if it does not already exist.
     #swagger.responses[200] = {
@@ -36,6 +37,7 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     /*
+    #swagger.tags = ['Connexion']
     #swagger.summary = Log in an existing user.
     #swagger.description = Generate a 1h expiring JWT token for a user.
     #swagger.responses[200] = {
