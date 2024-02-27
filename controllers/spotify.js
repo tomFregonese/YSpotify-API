@@ -16,7 +16,7 @@ exports.authUrl = (req, res) => {
     const scope = 'user-read-private user-read-email';
     const state = uuid.v4();
 
-    stateStore[state] = req.user.username;
+    stateStore[state] = req.user.sub;
 
     res.redirect('https://accounts.spotify.com/authorize?' +
         querystring.stringify({
@@ -60,7 +60,6 @@ exports.callback = (req, res) => {
                 headers: authOptions.headers
             }).then((response) => {
                 const data = response.data;
-                console.log(data);
                 //save the token in the user object
                 user.token = data.access_token;
                 user.refreshToken = data.refresh_token;
