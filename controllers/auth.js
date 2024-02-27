@@ -1,4 +1,6 @@
-const data = require("../DataBase/users.json");
+function getData() {
+    return JSON.parse(fs.readFileSync(path.join(__dirname, '../DataBase', 'users.json'), 'utf-8'));
+}
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
@@ -65,7 +67,7 @@ exports.login = async (req, res) => {
     const [username, password] = decodedCredentials.split(':');
 
     //Check if the user is registered
-    const users = data.users;
+    const users = getData().users;
     const user = users.find(usr => usr.username === username );
     if (!user) {
         return res.status(401).json("Incorrect username or user not registered");
@@ -76,7 +78,7 @@ exports.login = async (req, res) => {
         return res.status(401).json("Incorrect password")
     }
 
-    const token = jwt.sign({ sub: user.username }, data.jwtKey, { expiresIn: "1h"});
+    const token = jwt.sign({ sub: user.username }, getData().jwtKey, { expiresIn: "1h"});
     return res.json(token);
 };
 
