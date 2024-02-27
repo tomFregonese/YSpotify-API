@@ -22,16 +22,9 @@
           {
             "name": "body",
             "in": "body",
+            "description": "User credentials",
             "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/NewUser"
             }
           }
         ],
@@ -68,6 +61,25 @@
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "NewUser": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "Cookie Gank"
+        },
+        "password": {
+          "type": "string",
+          "example": "azerty"
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
     }
   }
 }

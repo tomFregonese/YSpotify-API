@@ -9,6 +9,11 @@ exports.register = async (req, res) => {
     #swagger.tags = ['Connexion']
     #swagger.summary = Register a new user
     #swagger.description = Register a new user if it does not already exist.
+    #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'User credentials',
+        schema: { $ref: '#/definitions/NewUser' }
+    }
     #swagger.responses[200] = {
       description: 'User successfully registered'
     }
