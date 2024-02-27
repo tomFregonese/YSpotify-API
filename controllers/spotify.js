@@ -1,5 +1,5 @@
 function getUsers() {
-    return require("../DataBase/users.json").users;
+    return JSON.parse(fs.readFileSync(path.join(__dirname, '../DataBase', 'users.json'), 'utf-8').users);
 }
 const fs = require("fs");
 const path = require("path");
