@@ -63,7 +63,11 @@ exports.callback = (req, res) => {
                 //save the token in the user object
                 user.token = data.access_token;
                 user.refreshToken = data.refresh_token;
-                fs.writeFileSync(path.join(__dirname, '../DataBase/users.json'), JSON.stringify({users: users}, null, 2));
+                //update the user in the database
+                const usersData = require("../DataBase/users.json");
+                const userIndex = usersData.users.findIndex(usr => usr.username === username);
+                usersData.users[userIndex] = user;
+                fs.writeFileSync(path.join(__dirname, '../DataBase/users.json'), JSON.stringify(usersData, null, 2));
                 res.json(data);
             }).catch((err) => {
                 console.log(err)
