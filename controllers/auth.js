@@ -5,6 +5,18 @@ const fs = require("fs");
 const path = require("path");
 
 exports.register = async (req, res) => {
+    /*
+    #swagger.tags = ['Connexion']
+    #swagger.summary = Register a new user
+    #swagger.description = Register a new user if it does not already exist.
+    #swagger.responses[200] = {
+      description: 'User successfully registered'
+    }
+    #swagger.responses[400] = {
+      description: 'User already exist'
+    }
+     */
+
     const { username, password } = req.body;
 
     // Check if username already exists
@@ -24,6 +36,17 @@ exports.register = async (req, res) => {
 
 
 exports.login = async (req, res) => {
+    /*
+    #swagger.tags = ['Connexion']
+    #swagger.summary = Log in an existing user.
+    #swagger.description = Generate a 1h expiring JWT token for a user.
+    #swagger.responses[200] = {
+      description: 'JWT token generated successfully'
+    }
+    #swagger.responses[401] = {
+      description: 'JWT token not generated: wrong header or wrong credentials'
+    }
+     */
 
     const authHeader = req.headers.authorization;
     //Check if the header is authorization Bearer
