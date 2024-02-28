@@ -13,6 +13,16 @@ const redirect_uri = 'http://localhost:3000/callback/';
 let stateStore = {};
 
 exports.authUrl = (req, res) => {
+    /*
+    #swagger.tags = ['Spotify']
+    #swagger.summary = Oath 2.0 delegation to use spotify API service.
+    #swagger.description = "Redirect to spotify Oauth service. If the user accepts your request,
+                            then the user is redirected back to the application using the redirect_uri
+                            passed on the authorized request. If the user does not accept your request
+                            or if an error has occurred, the query string contains the error, reason why
+                            it failed, and the state parameter supplied in the request."
+     */
+
     const scope = 'user-read-private user-read-email';
     const state = uuid.v4();
 
@@ -30,6 +40,22 @@ exports.authUrl = (req, res) => {
 
 
 exports.callback = (req, res) => {
+    /*
+    #swagger.tags = ['Spotify']
+    #swagger.summary = Ask an access token to spotify service.
+    #swagger.description = Ask an access Token to spotify API service.
+    #swagger.responses[200] = {
+      description: 'Access token successfully acquired',
+      schema: {
+            access_token: "access token",
+            token_type: "Bearer",
+            scope: "scope",
+            expires_in: 3600,
+            refresh_token: "refresh token"
+        }
+    }
+     */
+
     const code = req.query.code || null;
     const state = req.query.state || null;
 

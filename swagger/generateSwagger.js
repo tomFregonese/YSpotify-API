@@ -8,14 +8,19 @@ const doc = {
     host: 'localhost:3000',
     definitions: {
         NewUser: {
-            $username: "Cookie Gank",
+            $username: "CookieGank",
             $password: "azerty"
+        },
+        NewGroup: {
+            groupName: "Cookies"
         }
     }
 }
 const outputFile = "./swagger_output.json";
 const routes = [
-    "../routes/auth.js"
+    "../routes/auth.js",
+    "../routes/groups.js",
+    "../routes/spotify.js"
 ];
 
 autoSwagger(outputFile, routes, doc)
