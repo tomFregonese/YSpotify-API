@@ -61,6 +61,65 @@
           }
         }
       }
+    },
+    "/join-group": {
+      "post": {
+        "tags": [
+          "Group"
+        ],
+        "summary": "Add a user to a group.",
+        "description": "Add a user to a group. If the user join a group that doesn't exist, the group is\r   created and the user is the owner of the group. If the user is already in a group, then\r   he automatically quit his current group to join the new one. If the owner of the group leaves it,\r   a new owner is randomly chosen from the members of the group. If the user is the only member of the group,\r   the current group will disappear.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Group name",
+            "schema": {
+              "$ref": "#/definitions/NewGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Group successfully joined"
+          }
+        }
+      }
+    },
+    "/auth-url": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/callback": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -80,6 +139,15 @@
         "username",
         "password"
       ]
+    },
+    "NewGroup": {
+      "type": "object",
+      "properties": {
+        "groupName": {
+          "type": "string",
+          "example": "Cookies"
+        }
+      }
     }
   }
 }
