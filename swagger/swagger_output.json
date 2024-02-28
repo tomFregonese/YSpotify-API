@@ -69,7 +69,7 @@
       "properties": {
         "username": {
           "type": "string",
-          "example": "Cookie Gank"
+          "example": "CookieGank"
         },
         "password": {
           "type": "string",

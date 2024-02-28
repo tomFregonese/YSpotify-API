@@ -8,7 +8,7 @@ const doc = {
     host: 'localhost:3000',
     definitions: {
         NewUser: {
-            $username: "Cookie Gank",
+            $username: "CookieGank",
             $password: "azerty"
         }
     }
