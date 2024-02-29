@@ -40,7 +40,11 @@ node Index.js
 
 <br>
 
-<p>Une fois le serveur lancé sur le port 3000, il peut être requêté de deux manières :</p>
+<p>Une fois le serveur lancé sur le port 3000, il ne reste plus qu'à modifier YOUR_CLIENT_ID and YOUR_CLIENT_SECRET 
+dans client-credentials.json par ceux disponibles dans le txt de rendu. 
+
+L'API peut en suite être requêtée de deux manières : </p>
+
 <h4>1. Via une application de test d'API web telle que POSTMAN. </h4>
 
 <h4>2. Via le Swagger UI accessible à la route [/api-docs](http://localhost:3000/api-docs). </h4>
