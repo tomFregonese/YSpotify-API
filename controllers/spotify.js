@@ -23,7 +23,7 @@ exports.authUrl = (req, res) => {
                             it failed, and the state parameter supplied in the request."
      */
 
-    const scope = 'user-read-private user-read-email';
+    const scope = 'user-read-private user-library-read user-read-email';
     const state = uuid.v4();
 
     stateStore[state] = req.user.sub;
@@ -100,4 +100,36 @@ exports.callback = (req, res) => {
             });
         }
     }
+}
+
+exports.getPortrait = async (req, res) => {
+    const database = require('../DataBase/users.json');
+    const username = req.user.sub;
+    console.log('user is : ', username);
+    const accessToken = database.users.find( usr => usr.username === username).token;
+    const header = {
+        headers: {
+            'Authorization': `Bearer ${accessToken}`
+        }
+    }
+
+    //Get user's saved tracks
+    let response = await axios.get('https://api.spotify.com/v1/me/tracks?limit=50', { headers: header.headers });
+    const tracks = response.data.items;
+    console.log("Tracks are : ", tracks);
+    let tracksIds = getTracksIds(tracks);
+
+    //Get users saved tracks data
+    response = await axios.get(`https://api.spotify.com/v1/audio-features?ids=${tracksIds}`);
+    audioFeatures = reponse.data.audio_features;
+
+
+}
+
+function getTracksIds(tracks) {
+    let tracksIds = "";
+    for (let track of tracks) {
+        tracksIds += track.id + ',';
+    }
+    return tracksIds.substring(0, tracksIds.length - 1);
 }

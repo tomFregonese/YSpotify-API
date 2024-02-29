@@ -5,6 +5,7 @@ const authenticateJwt = require('../middlewares/authenticateJwt').authenticateJw
 
 router.get('/auth-url', authenticateJwt, controller.authUrl);
 router.get('/callback', controller.callback);
+router.get('/portrait', authenticateJwt,controller.getPortrait);
 //router.get('/recently-played', controller.recentlyPlayed);
 
 module.exports = router;
